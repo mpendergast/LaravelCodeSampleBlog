@@ -13,4 +13,8 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/authors/{id}', 'AuthorController@index')->name('byAuthor');
+
+Route::get('/articles/{id}', 'ArticleController@index')->name('article');
+
 Auth::routes();

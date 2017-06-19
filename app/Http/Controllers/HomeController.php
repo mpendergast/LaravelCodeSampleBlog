@@ -35,8 +35,7 @@ class HomeController extends Controller
                 'authorName' => $author->name,
                 'articleId' => $article->id,
                 'articleTitle' => $article->title,
-                'articleContent' => substr($article->content, 0, 40).
-                    (strlen($article->content) > 40 ? '...' : ''),
+                'articleContent' => $article->preview(),
             ];
         }
 

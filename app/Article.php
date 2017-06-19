@@ -10,4 +10,9 @@ class Article extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function preview($length = 40)
+    {
+        return substr($this->content, 0, $length).(strlen($this->content) > $length ? '...' : '');
+    }
 }
