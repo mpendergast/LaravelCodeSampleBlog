@@ -5,9 +5,11 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Our Authors</div>
+                <div class="panel-heading">{{ $article->title }} by
+                    <a href={!! route('byAuthor', ['id' => $article->user->id]) !!}>{{ $article->user->name }} </a>
+                </div>
                 <div class="panel-body">
-                    @each('partials.author-preview', $authorPreviews, 'preview')
+                    {{ $article->content }}
                 </div>
             </div>
         </div>

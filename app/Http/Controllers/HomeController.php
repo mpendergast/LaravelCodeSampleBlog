@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +15,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
     /**
@@ -23,6 +24,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $authors = User::where('isAuthor', true)->get();
+
+        $authorPreviews = [];
+
+        foreach ($authors as $author) {
+            $article = $author->articles()->orderBy('id', 'desc')->first();
+            $authorPreviews[] = [
+                'authorId' => $author->id,
+                'authorName' => $author->name,
+                'articleId' => $article->id,
+                'articleTitle' => $article->title,
+                'articleContent' => $article->preview(),
+            ];
+        }
+
+        return view('home', ['authorPreviews' => $authorPreviews]);
     }
 }

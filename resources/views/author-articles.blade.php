@@ -5,9 +5,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Our Authors</div>
+                <div class="panel-heading">Articles by {{ $author->name }}</div>
                 <div class="panel-body">
-                    @each('partials.author-preview', $authorPreviews, 'preview')
+                    @each('partials.article-preview', $articles, 'article')
                 </div>
             </div>
         </div>

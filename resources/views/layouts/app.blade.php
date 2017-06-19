@@ -29,7 +29,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ 'MartyBlog' }}
                     </a>
                 </div>
 
@@ -52,6 +52,13 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    @if (Auth::user()->isAuthor)
+                                        <li>
+                                            <a href="{{ route('writeArticle') }}">
+                                                Write an article
+                                            </a>
+                                        </li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -70,6 +77,20 @@
                 </div>
             </div>
         </nav>
+
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissable" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{ session('success') }}
+            </div>
+        @elseif (session('errors'))
+            @foreach (session('errors') as $error)
+                <div class="alert alert-danger alert-dismissable" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ $error }}
+                </div>
+            @endforeach
+        @endif
 
         @yield('content')
     </div>
